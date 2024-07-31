@@ -16,7 +16,7 @@ import {
 } from "ionicons/icons";
 
 const Home: React.FC = () => {
-  const headerTitle = "單車定向（Petrol）";
+  const headerTitle = "單車定向（Patrol）";
 
   return (
     <IonPage>
@@ -33,7 +33,7 @@ const Home: React.FC = () => {
       <IonContent className="ion-padding">
         <p>
           <IonIcon icon={bicycleOutline}></IonIcon>
-          <span>你是Petrol，你的任務是</span>
+          <span>你是Patrol，你的任務是</span>
         </p>
         <ul>照顧參加者</ul>
         <ul>控制遊戲平衡</ul>

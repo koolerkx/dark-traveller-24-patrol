@@ -33,16 +33,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     throw new Error("AuthProvider must be used within a FirebaseProvider");
 
   const auth = getAuth(app);
-  if (
-    process.env.FIRESTORE_EMULATOR == "true" &&
-    !!process.env.FIREBASE_AUTH_EMULATOR_HOST
-  ) {
-    // https://stackoverflow.com/questions/73605307/firebase-auth-emulator-fails-intermittently-with-auth-emulator-config-failed
-    (auth as unknown as any)._canInitEmulator = true;
-    connectAuthEmulator(auth, process.env.FIREBASE_AUTH_EMULATOR_HOST, {
-      disableWarnings: true,
-    });
-  }
 
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -69,6 +59,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           email,
           password
         );
+
+        console.log("login success");
 
         return userCrendential.user;
       } catch (error) {

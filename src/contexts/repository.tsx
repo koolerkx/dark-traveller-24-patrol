@@ -13,6 +13,7 @@ import React, {
 import PointRepository from "../repository/point";
 import UserRepository from "../repository/user";
 import { useFirebase } from "./firebase";
+import { useAuth } from "./auth";
 
 interface RepositoryContext {
   pointRepository: PointRepository | null;
@@ -37,6 +38,7 @@ export const RepositoryProvider = ({
   );
 
   const { app } = useFirebase();
+  const { login } = useAuth();
 
   useEffect(
     useCallback(() => {
@@ -44,16 +46,7 @@ export const RepositoryProvider = ({
 
       const db = getFirestore(app);
 
-      if (
-        process.env.FIRESTORE_EMULATOR == "true" &&
-        !!process.env.FIREBASE_FIRESTORE_EMULATOR_HOST
-      ) {
-        connectFirestoreEmulator(
-          db,
-          process.env.FIREBASE_FIRESTORE_EMULATOR_HOST,
-          8080
-        );
-      }
+      login({ username: "patrol", password: "123456" });
 
       setDb(db);
       setPointRepository(new PointRepository(db));

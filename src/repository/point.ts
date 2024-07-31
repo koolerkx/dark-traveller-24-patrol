@@ -110,6 +110,8 @@ class PointRepository extends FirestoreRepository {
       return { ...acc, [cur.id]: cur };
     }, {});
 
+    console.log(users);
+
     const capturedPoint = users
       .flatMap((it) => it.capturedPoints)
       .reduce<Record<string, CapturedPoint>>((acc, cur) => {
@@ -125,6 +127,8 @@ class PointRepository extends FirestoreRepository {
     const _pointQuery = await query(this.pointsRef);
     const pointsQuerySnapshot = await getDocs(_pointQuery);
     const points = pointsQuerySnapshot.docs.map((it) => it.data());
+
+    console.log(points);
 
     const result = points.map((it) => {
       return {
