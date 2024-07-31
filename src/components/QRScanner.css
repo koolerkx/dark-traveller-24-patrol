@@ -1,0 +1,43 @@
+.scanner-overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.scanner-top {
+  top: 0;
+  justify-content: flex-end;
+}
+
+.scanner-bottom {
+  bottom: 0;
+  justify-content: flex-start;
+}
+
+.scanner-top,
+.scanner-bottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 20px;
+}
+
+.scanner-container {
+  width: 100%;
+  height: 100%;
+}
+
+.scanner-container canvas {
+  width: auto !important;
+  height: 100%;
+}

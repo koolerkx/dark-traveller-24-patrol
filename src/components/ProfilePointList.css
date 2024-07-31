@@ -1,0 +1,22 @@
+.profile-point-list ion-note {
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.profile-point-list ion-item-divider {
+  display: flex;
+}
+
+.profile-point-list ion-label {
+  flex-shrink: 0;
+}
+
+.profile-point-list .level {
+  text-align: right;
+}
+
+.profile-point-list-loading {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+}

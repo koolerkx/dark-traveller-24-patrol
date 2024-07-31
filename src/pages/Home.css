@@ -1,0 +1,7 @@
+.sign-in-button {
+  color: var(--ion-color-primary);
+}
+
+.item-lines-danger {
+  --border-color: var(--ion-color-danger);
+}

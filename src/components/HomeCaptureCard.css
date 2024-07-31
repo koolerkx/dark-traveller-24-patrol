@@ -1,0 +1,54 @@
+.capture-card-point-list {
+  /* display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 0.5rem; */
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 0.5rem;
+  column-gap: 0.5rem;
+
+  margin-top: 16px;
+}
+
+.capture-card ion-chip {
+  pointer-events: none;
+  margin: 0;
+}
+
+.capture-card ion-list {
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.capture-card ion-label:nth-child(2n) {
+  text-align: right;
+}
+
+.capture-card-info-dps {
+  display: flex;
+  justify-content: space-between;
+}
+
+.capture-card-info-dps-text {
+  display: flex !important;
+  justify-content: flex-end;
+}
+
+.capture-card-point-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  margin-top: 16px;
+}
+
+.capture-card-point-none-hint {
+  text-align: center;
+
+  margin-top: 16px;
+}

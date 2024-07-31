@@ -1,0 +1,21 @@
+.map-container {
+  height: 100%;
+  width: 100%;
+}
+
+.marker-image {
+  width: 300px;
+  /* height: 300px; */
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+}
+
+.popup-description-container {
+  /* margin-top: 10px; */
+  width: 300px;
+}
+
+.popup-description-container ion-text {
+  font-size: 14px;
+  font-weight: bold;
+}

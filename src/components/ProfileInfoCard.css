@@ -1,0 +1,39 @@
+.profile-card-button {
+  position: absolute;
+
+  top: 16px;
+  right: 16px;
+}
+
+.profile-data-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 0px 10px;
+
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.profile-data-item {
+  display: inline-block;
+  text-align: center;
+}
+
+.profile-data-list .profile-data-title .profile-data-unit {
+  font-size: 12px;
+  font-weight: thin;
+}
+
+.profile-data-list .profile-data-datum {
+  font-size: 18px;
+  font-weight: bold;
+
+  display: flex;
+  justify-content: center;
+}
+
+.profile-data-list-separator {
+  border-left: 0.75px solid var(--ion-color-medium-tint);
+  margin: 10px 0;
+}

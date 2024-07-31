@@ -1,0 +1,10 @@
+.ranking-point-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 0.5rem;
+  column-gap: 0.5rem;
+}
+
+.ranking-point-none {
+  text-align: center;
+}

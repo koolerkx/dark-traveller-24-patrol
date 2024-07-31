@@ -1,0 +1,7 @@
+{
+  "name": "dark-traveller-24",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
