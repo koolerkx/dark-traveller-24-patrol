@@ -15,6 +15,20 @@ export class CapturedPointInCooldownError extends Error {
   }
 }
 
+export class ClearedPointNotCapturedError extends Error {
+  constructor() {
+    super();
+    this.name = "ClearedPointNotCapturedError";
+  }
+}
+
+export class ClearedPointNotFoundError extends Error {
+  constructor() {
+    super();
+    this.name = "ClearedPointNotFoundError";
+  }
+}
+
 export class CapturedPointAlreadyCapturedError extends Error {
   public pointId: string;
 

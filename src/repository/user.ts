@@ -16,6 +16,8 @@ import {
 import {
   CapturedPointAlreadyCapturedError,
   CapturedPointInCooldownError,
+  ClearedPointNotCapturedError,
+  ClearedPointNotFoundError,
   MaximumLevelAchievedError,
   UpgradePointAlreadyAppliedError,
 } from "../error";
@@ -227,6 +229,62 @@ class UserRepository extends FirestoreRepository {
     });
 
     return capturedPoint;
+  }
+
+  public async clearPoint(pointId: string): Promise<CapturedPoint> {
+    const clearedPoint = await runTransaction(this.db, async (transaction) => {
+      const now = new Date();
+      const usersQuerySnapshot = await getDocs(this.userRef);
+
+      const users = await usersQuerySnapshot.docs.map((it) => it.data());
+
+      const allCapturedPoints = users.flatMap((it) => it.capturedPoints);
+      const lastCapturedPoint = allCapturedPoints
+        .filter((it) => it.pointId === pointId)
+        .find((it) => it.expiredAt === null);
+
+      // Check last captured point is captured over 300 seconds
+      const secondsSinceCaptured = differenceInSeconds(
+        now,
+        lastCapturedPoint?.createdAt ? lastCapturedPoint?.createdAt : 0
+      );
+
+      const isLastCaptureExpired =
+        secondsSinceCaptured > CAPTURED_POINT_COOLDOWN_SECONDS;
+
+      if (!isLastCaptureExpired) {
+        throw new CapturedPointInCooldownError(secondsSinceCaptured);
+      }
+
+      if (!!lastCapturedPoint) {
+        // Clear other user last captured point
+        const lastCapturedPointUserSnapshot = usersQuerySnapshot.docs.find(
+          (it) => it.id === lastCapturedPoint.userId
+        );
+
+        if (!!lastCapturedPointUserSnapshot) {
+          const updatedCapturedPoint = lastCapturedPointUserSnapshot
+            .data()
+            .capturedPoints.map((it) =>
+              it.pointId === lastCapturedPoint.pointId
+                ? { ...it, expiredAt: now }
+                : it
+            )
+            .map(parseCapturedPoint.toFirestore);
+
+          transaction.update(lastCapturedPointUserSnapshot.ref, {
+            capturedPoints: updatedCapturedPoint,
+          });
+
+          return lastCapturedPoint;
+        } else {
+          throw new ClearedPointNotCapturedError();
+        }
+      }
+      throw new ClearedPointNotFoundError();
+    });
+
+    return clearedPoint;
   }
 
   // ascending order of rank, descending order of attackedPower
