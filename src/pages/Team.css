@@ -1,0 +1,18 @@
+.team-info-item ion-progress-bar {
+  --background: #c5000f;
+  --progress-background: #09c567;
+}
+
+.team-info-item ion-chip {
+  pointer-events: none;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.activity-item-title {
+  flex-grow: 1;
+}

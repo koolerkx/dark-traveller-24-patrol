@@ -1,14 +1,14 @@
 const ATTACK_POWER: Record<string, number> = {
-  _: 5,
-  "1": 5,
-  "2": 10,
-  "3": 20,
-  "4": 40,
-  "5": 100,
+  _: 1 / 60,
+  "1": 1 / 60,
+  "2": 5 / 60,
+  "3": 10 / 60,
+  "4": 30 / 60,
+  "5": 50 / 60,
 };
 
-const BOSS_HP_120 = 200000;
-const BOSS_HP_180 = 200000;
+const BOSS_HP_120 = 12500;
+const BOSS_HP_180 = 25500;
 
 const BOSS_HP = BOSS_HP_120;
 

@@ -25,6 +25,7 @@ import {
 import { CapturedPoint, UpgradedPoint, pointConverter } from "./point";
 import { FirestoreRepository } from "./repository";
 import { getBossInfo } from "../utils/boss";
+import { ActivityLog } from "../types/activitylog";
 
 // 5 minutes
 export const CAPTURED_POINT_COOLDOWN_SECONDS = 60;
@@ -287,7 +288,7 @@ class UserRepository extends FirestoreRepository {
 
     // Log: Cleared Point
     const clearLogRef = await addDoc(collection(this.db, "activitylog"), {
-      datetime: new Date(),
+      datetime: new Date().toISOString(),
       type: "PATROL_CLEAR_POINT",
       point: clearedPoint,
     });
@@ -314,6 +315,12 @@ class UserRepository extends FirestoreRepository {
       }));
 
     return ranking;
+  }
+
+  public async getActivityLog(): Promise<ActivityLog[]> {
+    const querySnapshot = await getDocs(collection(this.db, "activitylog"));
+    const logs = querySnapshot.docs.map((it) => it.data());
+    return logs as ActivityLog[];
   }
 }
 

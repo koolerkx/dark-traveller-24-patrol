@@ -11,7 +11,7 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import Home from "./pages/Home";
 
 /* Core CSS required for Ionic components to work properly */
@@ -42,7 +42,7 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/palettes/dark.system.css";
 
 /* Theme variables */
-import { home, map, podium, qrCode } from "ionicons/icons";
+import { home, map, people, podium, qrCode } from "ionicons/icons";
 import "./theme/variables.css";
 
 import { useAuth } from "./contexts/auth";
@@ -50,6 +50,7 @@ import Map from "./pages/Map";
 import Ranking from "./pages/Ranking";
 import Scan from "./pages/Scan";
 import "./theme/global.css";
+import Team from "./pages/Team";
 
 setupIonicReact();
 
@@ -76,6 +77,11 @@ const App: React.FC = () => {
       icon: podium,
       label: "排行榜",
     },
+    {
+      name: "team",
+      icon: people,
+      label: "隊伍資料",
+    },
   ];
 
   return (
@@ -83,11 +89,14 @@ const App: React.FC = () => {
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
-            <Route exact path="/" render={() => <Home />}></Route>
+            <Route exact path="/">
+              <Redirect to={"/home"} />
+            </Route>
             <Route exact path="/home" render={() => <Home />}></Route>
             <Route exact path="/map" render={() => <Map />}></Route>
             <Route exact path="/ranking" render={() => <Ranking />}></Route>
             <Route exact path="/scan" render={() => <Scan />}></Route>
+            <Route exact path="/team" render={() => <Team />}></Route>
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
             {tabBarButtonConfig.map((config, index) => (
