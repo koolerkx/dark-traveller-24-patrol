@@ -3,6 +3,7 @@ import {
   Firestore,
   QueryDocumentSnapshot,
   SnapshotOptions,
+  addDoc,
   collection,
   doc,
   getDoc,
@@ -276,12 +277,19 @@ class UserRepository extends FirestoreRepository {
             capturedPoints: updatedCapturedPoint,
           });
 
-          return lastCapturedPoint;
+          return { ...lastCapturedPoint, expiredAt: now };
         } else {
           throw new ClearedPointNotCapturedError();
         }
       }
       throw new ClearedPointNotFoundError();
+    });
+
+    // Log: Cleared Point
+    const clearLogRef = await addDoc(collection(this.db, "activitylog"), {
+      datetime: new Date(),
+      type: "PATROL_CLEAR_POINT",
+      point: clearedPoint,
     });
 
     return clearedPoint;
